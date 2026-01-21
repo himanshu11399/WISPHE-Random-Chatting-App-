@@ -18,7 +18,7 @@ export async function getChats(req: AuthRequest, res: Response, next: NextFuncti
 
             return {
                 _id: chat._id,
-                paticipant: otherParticipant,
+                participant: otherParticipant,
                 lastMessage: chat.lastMessage,
                 lastMessageAt: chat.lastMessageAt,
                 createdAt: chat.createdAt,
@@ -50,7 +50,7 @@ export async function createChat(req: AuthRequest, res: Response, next: NextFunc
             chat = await newChat.populate("participants", "name email avatar");
         }
 
-        const otherParticipant = chat.participants.find((p: any) => p._toString() !== userId);
+        const otherParticipant = chat.participants.find((p: any) => p._id.toString() !== userId);
 
         res.json({
             _id: chat._id,
