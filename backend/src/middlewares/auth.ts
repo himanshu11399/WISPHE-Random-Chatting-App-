@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from "express"
 import { getAuth, requireAuth } from "@clerk/express"
-import { User } from "../models/User.js"
+import { User } from "../models/User"
 
 export type AuthRequest = Request & {
     userId?: string;

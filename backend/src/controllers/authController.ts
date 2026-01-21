@@ -25,7 +25,7 @@ export async function authCallback(req: Request, res: Response, next: NextFuncti
         const { userId: clerkId } = getAuth(req);
 
         if (!clerkId) {
-            res.status(401).json({ message: "Unautorized" });
+            res.status(401).json({ message: "Unauthorized" });
             return;
         }
 
@@ -47,7 +47,7 @@ export async function authCallback(req: Request, res: Response, next: NextFuncti
 
         res.status(200).json(user);
     } catch (error) {
-        res.status(500).json({ message: "Internal Server Error" });
+        res.status(500);
         next(error);
     }
 }

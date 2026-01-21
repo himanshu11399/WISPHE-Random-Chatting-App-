@@ -1,11 +1,11 @@
 import express from "express"
-import authRoutes from "./routes/authRoutes.js"
-import chatRoutes from "./routes/chatRoutes.js"
-import messageRoutes from "./routes/messageRoutes.js"
-import userRoutes from "./routes/userRoutes.js"
+import authRoutes from "./routes/authRoutes"
+import chatRoutes from "./routes/chatRoutes"
+import messageRoutes from "./routes/messageRoutes"
+import userRoutes from "./routes/userRoutes"
 import cors from "cors"
 import { clerkMiddleware } from '@clerk/express'
-import { errorHandler } from "./middlewares/errorHandler.js"
+import { errorHandler } from "./middlewares/errorHandler"
 
 
 
