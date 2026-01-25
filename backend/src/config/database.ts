@@ -6,7 +6,10 @@ export const connectDB = async () => {
         if (!mongoUri) {
             throw new Error("MongoDB_Uri environment is not defined");
         }
-        await mongoose.connect(mongoUri);
+        await mongoose.connect(mongoUri,{
+            tls: true,
+            tlsAllowInvalidCertificates: true,
+        })
         console.log("✅ MongoDB Connect Sucessfully");
     } catch (error) {
         console.error("💀 MongoDb connection error:", error);

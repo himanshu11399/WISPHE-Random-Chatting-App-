@@ -72,18 +72,18 @@ export async function createChat(req: AuthRequest, res: Response, next: NextFunc
     }
 }
 
-// export async function deleteChat(req: AuthRequest, res: Response, next: NextFunction) {
-//     try {
-//         const userId = req.userId;
-//         const ownerId = req.params;
+export async function deleteChat(req: AuthRequest, res: Response, next: NextFunction) {
+    try {
+        const userId = req.userId;
+        const ownerId = req.params;
 
-//         await Chat.findOneAndDelete({ participants: [userId, ownerId] });
+        await Chat.findOneAndDelete({ participants: [userId, ownerId] });
 
-//         res.status(200).json({
-//             message: "Delete Sucessfully"
-//         })
-//     } catch (error) {
-//         res.status(500);
-//         next(error);
-//     }
-// }
+        res.status(200).json({
+            message: "Delete Sucessfully"
+        })
+    } catch (error) {
+        res.status(500);
+        next(error);
+    }
+}
