@@ -4,7 +4,6 @@ import { verifyToken } from "@clerk/express";
 import { Message } from "../models/Message";
 import { User } from "../models/User";
 import { Chat } from "../models/Chat";
-import { Extension } from "typescript";
 
 interface SocketWithUserId extends Socket {
     userId?: string;
@@ -17,8 +16,9 @@ export const initializeSocket = (httpServer: httpServer) => {
     const allowedOrigins = [
         "http://localhost:3000", //For web frontend
         "http://localhost:8081",  //For Expo Dev Client
-        process.env.FRONTEND_URL as string || ""  //For production frontend
-    ]
+        process.env.FRONTEND_URL, //For production frontend
+    ].filter(Boolean) as string[];
+
     const io = new SocketIOServer(httpServer, { cors: { origin: allowedOrigins } });
 
 
@@ -110,7 +110,11 @@ export const initializeSocket = (httpServer: httpServer) => {
 
                 //also emit to participants personal rooms (for chat list view)
                 for (const participantId of chat.participants) {
-                    io.to(`user:${participantId.toString()}`).emit("new-message", message);
+                    io.to(`user:${participantId.toString()}`).emit("chat-updated", {
+                        chatId,
+                        lastMessage: message,
+                        lastMessageAt: chat.lastMessageAt
+                    });
                 }
 
 
